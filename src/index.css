@@ -13,3 +13,17 @@ body {
   margin-right: auto;
   background-color: #f1ab48;
 }
+
+form {
+  align-items: center;
+  justify-content: center;
+  padding: .2em;
+  background-color: whitesmoke;
+}
+
+label > input {
+  margin: auto;
+  display: block;
+  margin-top: .2em;
+  margin-bottom: .2em;
+}
