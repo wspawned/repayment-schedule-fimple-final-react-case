@@ -17,11 +17,23 @@ body {
 form {
   align-items: center;
   justify-content: center;
-  padding: .2em;
-  background-color: whitesmoke;
+  padding: 2em;
+  background-color: beige;
+  border-radius: 2em;
+}
+
+label {
+  
 }
 
 label > input {
+  margin: auto;
+  display:block;
+  margin-top: .2em;
+  margin-bottom: .2em;
+}
+
+select {
   margin: auto;
   display: block;
   margin-top: .2em;

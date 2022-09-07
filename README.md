@@ -14,9 +14,7 @@ Geri ödeme planının bir tabloda gösterilmesi
 React.js kütüphanesi kullanılarak statik bir web sitesi yapılabilmesi  
 
 ```
-❗Not: Ekranların kullanıcı deneyimi odaklı olması, 
-görsellik ve hizalama konularına dikkat edilmesi 
-beklenmektedir.
+❗Not: Ekranların kullanıcı deneyimi odaklı olması, görsellik ve hizalama konularına dikkat edilmesi beklenmektedir.
 ```
 
 # Beklenen Özellikler
@@ -35,7 +33,11 @@ Kar oranı aylık alınmıştır.
 
 Basit → Kâr = ( Anapara * Kâr oranı * ( gün sayısı / 30 ))
 
-Bileşik → Kâr = ( Anapara * ( ( 1 + kâr oranı) ^ (gün sayısı / 30) ) ) - Anapara
+Bileşik → Kâr = ( Anapara * ( ( 1 + kâr oranı) ^ (gün sayısı / 30) ) ) - Anapara  
+
+KKDF = Kâr Tutarı * (1.15)  
+
+BSMV = Kâr Tutarı * (1.10)   
 
 # Örnek Hesaplama
 
@@ -46,3 +48,8 @@ Bileşik → Kâr = ( Anapara * ( ( 1 + kâr oranı) ^ (gün sayısı / 30) ) ) 
 * Taksit Sayısı: 12
 
 * Taksit aralığı: Aylık
+
+# Notes
+
+* haftalık ve yıllık durumlarında nasıl olacak
+* ll
