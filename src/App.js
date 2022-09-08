@@ -5,13 +5,13 @@ const App = () => {
   const [principal, setPrincipal] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [paymentPeriod, setPaymentPeriod] = useState("");
+  const [interestType,setInterestType] = useState("");
   const [numberOfInstallments, setNumberOfInstallments] = useState("");
   const [kkdfTax, setKkdfTax] = useState("");
   const [bsmvTax, setBsmvTax] = useState("");
   const [tableInfo, setTableInfo] = useState([]);
-  const [interestType,setInterestType] = useState("");
 
-  const FREQUENCY = ["aylık", "yıllık", "haftalık"];
+  const PAYMENT_FREQUENCY = ["aylık", "yıllık", "haftalık"];
   const INTEREST_TYPE = ["bileşik","basit"];
 
   const compute = () => {
@@ -20,11 +20,16 @@ const App = () => {
     const principalValue = Number(principal);
     const kkdf = Number(kkdfTax) / 100;
     const bsmv = Number(bsmvTax) / 100;
-
-    const appliedInterestRate = rate * (1 + kkdf + bsmv);
-    const installment = (appliedInterestRate * principalValue) / (1 - Math.pow(1 + appliedInterestRate, -numberOfPayment));
-
+    const MonthlyInterestTaxRate = rate * (1 + kkdf + bsmv);
+    let appliedInterestRateDuePeriod = 0;
+    if(paymentPeriod==="haftalık") appliedInterestRateDuePeriod = MonthlyInterestTaxRate/4;
+    else if(paymentPeriod==="yıllık") appliedInterestRateDuePeriod = MonthlyInterestTaxRate*12;
+    else appliedInterestRateDuePeriod = MonthlyInterestTaxRate;
+    
+    
     const paymentsList = [];
+    
+    const installment = (appliedInterestRateDuePeriod * principalValue) / (1 - Math.pow(1 + appliedInterestRateDuePeriod, -numberOfPayment));
     let remainingPrincipal = principalValue;
     let totalInterestPayment = 0;
     let totalTaxPayment = 0;
@@ -56,12 +61,13 @@ const App = () => {
         totalPayment: totalPayment,
       });
     }
+    
     setTableInfo(paymentsList);
   };
 
   return (
     <div>
-      <h1>Kredi Ödeme Planı Hesaplayıcı</h1>
+      <h1>Kredi Ödeme Planı Hesaplama</h1>
       <form
         className="user-inputs"
         onSubmit={(e) => {
@@ -82,7 +88,7 @@ const App = () => {
           ></input>
         </label>
         <label>
-          Faiz Oranı (%)
+          Aylık Faiz Oranı (%)
           <input
             type="number"
             placeholder="%2,28"
@@ -101,7 +107,7 @@ const App = () => {
             onBlur={(e) => setPaymentPeriod(e.target.value)}
           >
             <option/>
-            {FREQUENCY.map((option) => (
+            {PAYMENT_FREQUENCY.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
