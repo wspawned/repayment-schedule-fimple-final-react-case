@@ -51,4 +51,5 @@ BSMV = Kâr Tutarı * (1.10)
 
 # Notes
 
-* ll
+* fix the select inputs, required n default.
+* 

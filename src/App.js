@@ -9,8 +9,10 @@ const App = () => {
   const [kkdfTax, setKkdfTax] = useState("");
   const [bsmvTax, setBsmvTax] = useState("");
   const [tableInfo, setTableInfo] = useState([]);
+  const [interestType,setInterestType] = useState("");
 
   const FREQUENCY = ["aylık", "yıllık", "haftalık"];
+  const INTEREST_TYPE = ["bileşik","basit"];
 
   const compute = () => {
     const rate = Number(interestRate) / 100;
@@ -20,13 +22,14 @@ const App = () => {
     const bsmv = Number(bsmvTax) / 100;
 
     const appliedInterestRate = rate * (1 + kkdf + bsmv);
-
-    const installment =
-      (appliedInterestRate * principalValue) /
-      (1 - Math.pow(1 + appliedInterestRate, -numberOfPayment));
+    const installment = (appliedInterestRate * principalValue) / (1 - Math.pow(1 + appliedInterestRate, -numberOfPayment));
 
     const paymentsList = [];
     let remainingPrincipal = principalValue;
+    let totalInterestPayment = 0;
+    let totalTaxPayment = 0;
+    let totalPayment = 0;
+
     for (let i = 0; i < numberOfPayment; i++) {
       const periodicInterest = remainingPrincipal * rate;
       const periodicKkdf = periodicInterest * kkdf;
@@ -35,7 +38,11 @@ const App = () => {
         periodicInterest + periodicKkdf + periodicBsmv;
       const periodicPrincipalPayment = installment - periodicInterestSum;
       const paymentNo = i + 1;
-      remainingPrincipal = remainingPrincipal - periodicPrincipalPayment;
+      remainingPrincipal -= periodicPrincipalPayment;
+      totalInterestPayment += periodicInterest;
+      totalTaxPayment += (periodicKkdf + periodicBsmv);
+      totalPayment += installment;
+
       paymentsList.push({
         paymentNo: paymentNo,
         installment: installment,
@@ -44,6 +51,9 @@ const App = () => {
         interestPayment: periodicInterest,
         kkdfPayment: periodicKkdf,
         bsmvPayment: periodicBsmv,
+        totalInterestPayment: totalInterestPayment,
+        totalTaxPayment: totalTaxPayment,
+        totalPayment: totalPayment,
       });
     }
     setTableInfo(paymentsList);
@@ -90,6 +100,7 @@ const App = () => {
             onChange={(e) => setPaymentPeriod(e.target.value)}
             onBlur={(e) => setPaymentPeriod(e.target.value)}
           >
+            <option/>
             {FREQUENCY.map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -97,7 +108,21 @@ const App = () => {
             ))}
           </select>
         </label>
-        <br />
+        <label>
+          Faiz Türü
+          <select
+            value={interestType}
+            onChange={(e) => setInterestType(e.target.value)}
+            onBlur={(e) => setInterestType(e.target.value)}
+          >
+            <option/>
+            {INTEREST_TYPE.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
         <label>
           Taksit Sayısı
           <input
@@ -140,7 +165,27 @@ const App = () => {
       </form>
       
       {tableInfo.length ? (
+
         <div className="table">
+          <div>
+            <table>
+              <tr>
+                <th>Toplam Maliyet</th>
+                <th>Toplam Faiz</th>
+                <th>Toplam Vergi</th>
+                <th>Taksit</th>
+              </tr>
+              
+                <tr>
+                  <td>{tableInfo[tableInfo.length-1].totalPayment.toFixed(2)+" TL"}</td>
+                  <td>{tableInfo[tableInfo.length-1].totalInterestPayment.toFixed(2)+" TL"}</td>
+                  <td>{tableInfo[tableInfo.length-1].totalTaxPayment.toFixed(2)+" TL"}</td>
+                  <td>{tableInfo[tableInfo.length-1].installment.toFixed(2)+" TL"}</td>
+                </tr>
+              
+            </table>
+          </div>
+
           <h2>GERİ ÖDEME PLANI TABLOSU</h2>
           <table>
             <tr>
@@ -158,7 +203,7 @@ const App = () => {
               const paymentNo = item.paymentNo;
               const installment = item.installment.toFixed(2);
               const principalPayment = item.principalPayment.toFixed(2);
-              const remainingPrincipal = item.remainingPrincipal.toFixed(2);
+              const remainingPrincipal = Math.abs(item.remainingPrincipal).toFixed(2);
               const interestPayment = item.interestPayment.toFixed(2);
               const kkdfPayment = item.kkdfPayment.toFixed(2);
               const bsmvPayment = item.bsmvPayment.toFixed(2);
