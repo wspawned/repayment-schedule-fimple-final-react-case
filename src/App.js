@@ -15,28 +15,29 @@ const App = () => {
   const INTEREST_TYPE = ["bileşik","basit"];
 
   const compute = () => {
-    const rate = Number(interestRate) / 100;
+    const monthlyInterestRate = Number(interestRate) / 100;
     const numberOfPayment = Number(numberOfInstallments);
     const principalValue = Number(principal);
     const kkdf = Number(kkdfTax) / 100;
     const bsmv = Number(bsmvTax) / 100;
-    const MonthlyInterestTaxRate = rate * (1 + kkdf + bsmv);
-    let appliedInterestRateDuePeriod = 0;
-    if(paymentPeriod==="haftalık") appliedInterestRateDuePeriod = MonthlyInterestTaxRate/4;
-    else if(paymentPeriod==="yıllık") appliedInterestRateDuePeriod = MonthlyInterestTaxRate*12;
-    else appliedInterestRateDuePeriod = MonthlyInterestTaxRate;
+
+    let interestRateDuePeriod = 0;
+    if(paymentPeriod==="haftalık") interestRateDuePeriod = monthlyInterestRate/4;
+    else if(paymentPeriod==="yıllık") interestRateDuePeriod = monthlyInterestRate*12;
+    else interestRateDuePeriod = monthlyInterestRate;
     
+    const appliedInterestTaxRate = interestRateDuePeriod * (1 + kkdf + bsmv);
     
     const paymentsList = [];
     
-    const installment = (appliedInterestRateDuePeriod * principalValue) / (1 - Math.pow(1 + appliedInterestRateDuePeriod, -numberOfPayment));
+    const installment = (appliedInterestTaxRate * principalValue) / (1 - Math.pow(1 + appliedInterestTaxRate, -numberOfPayment));
     let remainingPrincipal = principalValue;
     let totalInterestPayment = 0;
     let totalTaxPayment = 0;
     let totalPayment = 0;
 
     for (let i = 0; i < numberOfPayment; i++) {
-      const periodicInterest = remainingPrincipal * rate;
+      const periodicInterest = remainingPrincipal * interestRateDuePeriod;
       const periodicKkdf = periodicInterest * kkdf;
       const periodicBsmv = periodicInterest * bsmv;
       const periodicInterestSum =
@@ -175,6 +176,7 @@ const App = () => {
         <div className="table">
           <div>
             <table>
+              <tbody>
               <tr>
                 <th>Toplam Maliyet</th>
                 <th>Toplam Faiz</th>
@@ -188,12 +190,13 @@ const App = () => {
                   <td>{tableInfo[tableInfo.length-1].totalTaxPayment.toFixed(2)+" TL"}</td>
                   <td>{tableInfo[tableInfo.length-1].installment.toFixed(2)+" TL"}</td>
                 </tr>
-              
+              </tbody>
             </table>
           </div>
 
           <h2>GERİ ÖDEME PLANI TABLOSU</h2>
           <table>
+            <tbody>
             <tr>
               <th>Taksit No</th>
               <th>Taksit Tutarı</th>
@@ -226,6 +229,7 @@ const App = () => {
                 </tr>
               );
             })}
+            </tbody>
           </table>
         </div>
       ) : null}
