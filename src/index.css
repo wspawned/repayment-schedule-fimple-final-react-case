@@ -39,3 +39,16 @@ select {
   margin-top: .2em;
   margin-bottom: .2em;
 }
+
+table {
+  border: 2px solid black;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px black;
+}
+
+td {
+  text-align: center;
+}

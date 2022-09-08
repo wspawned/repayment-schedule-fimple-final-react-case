@@ -51,5 +51,4 @@ BSMV = Kâr Tutarı * (1.10)
 
 # Notes
 
-* haftalık ve yıllık durumlarında nasıl olacak
 * ll
