@@ -28,14 +28,13 @@ const App = () => {
     else if(paymentPeriod==="Yıllık") interestRateDuePeriod = monthlyInterestRate*12;
     else interestRateDuePeriod = monthlyInterestRate;
     
-    const appliedInterestTaxRate = interestRateDuePeriod * (1 + kkdf + bsmv);
+    let paymentsList = [];
     
-    const paymentsList = [];
-    
-    (interestType==="Basit Faiz")?
-    simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) :
-    compoundInterestCalculation(appliedInterestTaxRate, principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList);
-    
+    if(interestType==="Basit Faiz") {
+      paymentsList = simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv);
+    } else {
+      paymentsList = compoundInterestCalculation( principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv);
+    }
     setTableInfo(paymentsList);
   };
 
@@ -231,7 +230,9 @@ const App = () => {
 
 export default App;
 
-function compoundInterestCalculation(appliedInterestTaxRate, principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) {
+function compoundInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv) {
+  const paymentsList = [];
+  const appliedInterestTaxRate = interestRateDuePeriod * (1 + kkdf + bsmv);
   const installment = (appliedInterestTaxRate * principalValue) / (1 - Math.pow(1 + appliedInterestTaxRate, -numberOfPayment));
   let remainingPrincipal = principalValue;
   let totalInterestPayment = 0;
@@ -263,9 +264,11 @@ function compoundInterestCalculation(appliedInterestTaxRate, principalValue, num
       totalPayment: totalPayment,
     });
   }
+  return paymentsList;
 }
 
-function simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) {
+function simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv) {
+  const paymentsList = [];
   let remainingPrincipal = principalValue;
   let totalInterestPayment = 0;
   let totalTaxPayment = 0;
@@ -298,4 +301,5 @@ function simpleInterestCalculation(principalValue, numberOfPayment, interestRate
       totalPayment: totalPayment,
     } );
   }
+  return paymentsList;
 }
