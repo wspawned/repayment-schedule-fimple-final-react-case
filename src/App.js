@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
-import FormInput from "./Form";
-import { Table } from "./Table";
+import FormInput from "./FormInput";
+import Table from "./Table";
 
 const ResultContext = createContext();
 
