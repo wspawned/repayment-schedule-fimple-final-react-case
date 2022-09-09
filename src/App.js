@@ -14,6 +14,8 @@ const App = () => {
   const PAYMENT_FREQUENCY = ["aylık", "yıllık", "haftalık"];
   const INTEREST_TYPE = ["bileşik","basit"];
 
+  
+
   const compute = () => {
     const monthlyInterestRate = Number(interestRate) / 100;
     const numberOfPayment = Number(numberOfInstallments);
@@ -30,38 +32,9 @@ const App = () => {
     
     const paymentsList = [];
     
-    const installment = (appliedInterestTaxRate * principalValue) / (1 - Math.pow(1 + appliedInterestTaxRate, -numberOfPayment));
-    let remainingPrincipal = principalValue;
-    let totalInterestPayment = 0;
-    let totalTaxPayment = 0;
-    let totalPayment = 0;
-
-    for (let i = 0; i < numberOfPayment; i++) {
-      const periodicInterest = remainingPrincipal * interestRateDuePeriod;
-      const periodicKkdf = periodicInterest * kkdf;
-      const periodicBsmv = periodicInterest * bsmv;
-      const periodicInterestSum =
-        periodicInterest + periodicKkdf + periodicBsmv;
-      const periodicPrincipalPayment = installment - periodicInterestSum;
-      const paymentNo = i + 1;
-      remainingPrincipal -= periodicPrincipalPayment;
-      totalInterestPayment += periodicInterest;
-      totalTaxPayment += (periodicKkdf + periodicBsmv);
-      totalPayment += installment;
-
-      paymentsList.push({
-        paymentNo: paymentNo,
-        installment: installment,
-        principalPayment: periodicPrincipalPayment,
-        remainingPrincipal: remainingPrincipal,
-        interestPayment: periodicInterest,
-        kkdfPayment: periodicKkdf,
-        bsmvPayment: periodicBsmv,
-        totalInterestPayment: totalInterestPayment,
-        totalTaxPayment: totalTaxPayment,
-        totalPayment: totalPayment,
-      });
-    }
+    (interestType==="basit")?
+    simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) :
+    compoundInterestCalculation(appliedInterestTaxRate, principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList);
     
     setTableInfo(paymentsList);
   };
@@ -106,6 +79,7 @@ const App = () => {
             value={paymentPeriod}
             onChange={(e) => setPaymentPeriod(e.target.value)}
             onBlur={(e) => setPaymentPeriod(e.target.value)}
+            required
           >
             <option/>
             {PAYMENT_FREQUENCY.map((option) => (
@@ -121,6 +95,7 @@ const App = () => {
             value={interestType}
             onChange={(e) => setInterestType(e.target.value)}
             onBlur={(e) => setInterestType(e.target.value)}
+            required
           >
             <option/>
             {INTEREST_TYPE.map((option) => (
@@ -238,3 +213,72 @@ const App = () => {
 };
 
 export default App;
+
+function compoundInterestCalculation(appliedInterestTaxRate, principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) {
+  const installment = (appliedInterestTaxRate * principalValue) / (1 - Math.pow(1 + appliedInterestTaxRate, -numberOfPayment));
+  let remainingPrincipal = principalValue;
+  let totalInterestPayment = 0;
+  let totalTaxPayment = 0;
+  let totalPayment = 0;
+
+  for (let i = 0; i < numberOfPayment; i++) {
+    const periodicInterest = remainingPrincipal * interestRateDuePeriod;
+    const periodicKkdf = periodicInterest * kkdf;
+    const periodicBsmv = periodicInterest * bsmv;
+    const periodicInterestSum = periodicInterest + periodicKkdf + periodicBsmv;
+    const periodicPrincipalPayment = installment - periodicInterestSum;
+    const paymentNo = i + 1;
+    remainingPrincipal -= periodicPrincipalPayment;
+    totalInterestPayment += periodicInterest;
+    totalTaxPayment += (periodicKkdf + periodicBsmv);
+    totalPayment += installment;
+
+    paymentsList.push({
+      paymentNo: paymentNo,
+      installment: installment,
+      principalPayment: periodicPrincipalPayment,
+      remainingPrincipal: remainingPrincipal,
+      interestPayment: periodicInterest,
+      kkdfPayment: periodicKkdf,
+      bsmvPayment: periodicBsmv,
+      totalInterestPayment: totalInterestPayment,
+      totalTaxPayment: totalTaxPayment,
+      totalPayment: totalPayment,
+    });
+  }
+}
+
+function simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv, paymentsList) {
+  let remainingPrincipal = principalValue;
+  let totalInterestPayment = 0;
+  let totalTaxPayment = 0;
+  let totalPayment = 0;
+
+  for (let i = 0; i < numberOfPayment; i++) {
+
+    const periodicPrincipalPayment = principalValue/numberOfPayment;
+    const periodicInterest = principalValue*interestRateDuePeriod;
+    const periodicKkdf = periodicInterest * kkdf;
+    const periodicBsmv = periodicInterest * bsmv;
+    const installment = periodicPrincipalPayment + periodicInterest + periodicKkdf + periodicBsmv ;
+
+    const paymentNo = i + 1;
+    remainingPrincipal -= periodicPrincipalPayment;
+    totalInterestPayment += periodicInterest;
+    totalTaxPayment += (periodicKkdf + periodicBsmv);
+    totalPayment += installment;
+
+    paymentsList.push({
+      paymentNo: paymentNo,
+      installment: installment,
+      principalPayment: periodicPrincipalPayment,
+      remainingPrincipal: remainingPrincipal,
+      interestPayment: periodicInterest,
+      kkdfPayment: periodicKkdf,
+      bsmvPayment: periodicBsmv,
+      totalInterestPayment: totalInterestPayment,
+      totalTaxPayment: totalTaxPayment,
+      totalPayment: totalPayment,
+    } );
+  }
+}
