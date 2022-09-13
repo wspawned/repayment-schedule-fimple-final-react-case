@@ -144,7 +144,7 @@ const FormInput = (props) => {
               ></input>
             </label>
           </div>
-          <button type="submit">Hesapla</button>
+          <button type="submit" >Hesapla</button>
         </form>
       </div>
     );
