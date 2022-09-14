@@ -78,6 +78,10 @@ const Table = (props) => {
                   <th>Toplam Faiz</th>
                   <th>Toplam Vergi</th>
                   <th>Taksit</th>
+                  <th>
+                    <button className="table-maker"
+                    onClick={handleClick}>Tabloya git</button>
+                  </th>
                 </tr>
 
                 <tr>
@@ -99,11 +103,11 @@ const Table = (props) => {
                     {tableInfo[tableInfo.length - 1].installment.toFixed(2) +
                       " TL"}
                   </td>
+                  
                 </tr>
+            
               </tbody>
             </table>
-            <button className="table-maker"
-            onClick={handleClick}>Tablo Oluştur</button>
           </div>
           <TableOnFocus
           tableInfo={tableInfo}
