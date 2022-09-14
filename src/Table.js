@@ -12,7 +12,7 @@ const TableOnFocus = forwardRef((props,ref) => {
   );
 
   function scroll() {
-    divRef.current.scrollIntoView();
+    divRef.current.scrollIntoView({behavior:"smooth"});
   }
 
   return (
