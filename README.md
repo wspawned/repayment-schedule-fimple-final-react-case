@@ -51,5 +51,5 @@ BSMV = Kâr Tutarı * (1.10)
 
 # Notes
 
-* fix the select inputs, required n default.
+* https://color.adobe.com/tr/create/color-wheel
 * 
