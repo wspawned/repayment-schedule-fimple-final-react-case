@@ -18,10 +18,22 @@ const ContextProvider = (props) => {
   )
 }
 
-const App = () => {
+const toggleColor = (color) => {
+  return color==="#f1ab48" ? '#005991': '#f1ab48'; 
+}
+
+const App = (props) => {
+  const background = props.background;
+  const setBackground = props.setBackground;
 
   return (
-    <ContextProvider>
+    <div className="app"
+        style={{"background-color": background}}
+    >
+      <button
+      className="background-button"
+      onClick={() => setBackground(toggleColor(background))}>🌙 ☀️</button>
+      <ContextProvider>
       <ResultContext.Consumer>
         {(context) => <FormInput setTableInfo={context.setTableInfo} />}
       </ResultContext.Consumer>
@@ -29,6 +41,8 @@ const App = () => {
         {(context) => <Table tableInfo={context.tableInfo} />}
       </ResultContext.Consumer>
     </ContextProvider>
+  </div>  
+    
   );
 };
 

@@ -71,7 +71,7 @@ const Table = (props) => {
       {tableInfo.length ? (
         <div className="result-container">
           <div className="total-values" >
-            <table>
+            <table className="total-table">
               <tbody>
                 <tr>
                   <th>Toplam Maliyet</th>
