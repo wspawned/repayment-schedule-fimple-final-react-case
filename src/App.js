@@ -28,11 +28,11 @@ const App = (props) => {
 
   return (
     <div className="app"
-        style={{"background-color": background}}
+        style={{backgroundColor: background}}
     >
       <button
       className="background-button"
-      onClick={() => setBackground(toggleColor(background))}>🌙 ☀️</button>
+      onClick={() => setBackground(toggleColor(background))}>{background==="#f1ab48" ? "🌙" : "☀️"}</button>
       <ContextProvider>
       <ResultContext.Consumer>
         {(context) => <FormInput setTableInfo={context.setTableInfo} />}
