@@ -48,10 +48,6 @@ const FormInput = (props) => {
 
   return (
     <div className="home-page">
-      <h1>
-        Kredi Ödeme Planı <br />
-        Hesaplama
-      </h1>
       <form
         className="user-inputs"
         onSubmit={(e) => {

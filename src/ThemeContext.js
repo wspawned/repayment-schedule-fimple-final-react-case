@@ -4,13 +4,13 @@ import { useState } from "react";
 export const ThemeContext = createContext();
 
 export const ThemeProvider = (props) => {
-  const [background, setBackground] = useState("#f1ab48");
+  const [theme, setTheme] = useState({background:"#f1ab48", header:"black"});
 
   return (
     <ThemeContext.Provider
       value={{
-        background,
-        setBackground,
+        theme,
+        setTheme,
       }}
     >
       {props.children}

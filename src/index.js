@@ -10,8 +10,8 @@ root.render(
     <ThemeContext.Consumer>
       {(context) => (
         <App
-          background={context.background}
-          setBackground={context.setBackground}
+          theme={context.theme}
+          setTheme={context.setTheme}
         />
       )}
     </ThemeContext.Consumer>

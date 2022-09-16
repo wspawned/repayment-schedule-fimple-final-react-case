@@ -3,21 +3,27 @@ import { ResultContext, ResultProvider } from "./ResultContext";
 import Payments from "./Payments";
 
 const App = (props) => {
-  const background = props.background;
-  const setBackground = props.setBackground;
+  const background = props.theme.background;
+  const header = props.theme.header;
+  const setTheme = props.setTheme;
 
   const toggleColor = (color) => {
-    return color === "#f1ab48" ? "#005991" : "#f1ab48";
+    return color === "#f1ab48" ? {background:"#005991", header: "darkgrey"} : {background:"#f1ab48", header: "black"};
   };
 
   return (
     <div className="app" style={{ backgroundColor: background }}>
       <button
         className="background-button"
-        onClick={() => setBackground(toggleColor(background))}
+        onClick={() => setTheme(toggleColor(background))}
       >
         {background === "#f1ab48" ? "🌙" : "☀️"}
       </button>
+      <h1
+      style={{color: header}}>
+        Kredi Ödeme Planı <br />
+        Hesaplama
+      </h1>
       <ResultProvider>
         <ResultContext.Consumer>
           {(context) => <FormInput setTableInfo={context.setTableInfo} />}
