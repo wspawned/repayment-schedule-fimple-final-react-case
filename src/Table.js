@@ -1,23 +1,19 @@
 import { useRef, forwardRef, useImperativeHandle } from "react";
 
-const TableOnFocus = forwardRef((props,ref) => {
+const Table = forwardRef((props, ref) => {
   const tableInfo = props.tableInfo;
   const divRef = useRef();
-  
-  useImperativeHandle(
-    ref, 
-    () => ({
-      scroll: scroll
-    })
-  );
+
+  useImperativeHandle(ref, () => ({
+    scroll: scroll,
+  }));
 
   function scroll() {
-    divRef.current.scrollIntoView({behavior:"smooth"});
+    divRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
-    <div className="table-container"
-    ref={divRef}>
+    <div className="table-container" ref={divRef}>
       <h2>GERİ ÖDEME PLANI TABLOSU</h2>
       <table>
         <tbody>
@@ -57,66 +53,6 @@ const TableOnFocus = forwardRef((props,ref) => {
       </table>
     </div>
   );
-})
-
-const Table = (props) => {
-  const tableInfo = props.tableInfo;
-  const tableRef = useRef();
-  const handleClick = () => {
-    tableRef.current.scroll();
-  }
-
-  return (
-    <div>
-      {tableInfo.length ? (
-        <div className="result-container">
-          <div className="total-values" >
-            <table className="total-table">
-              <tbody>
-                <tr>
-                  <th>Toplam Maliyet</th>
-                  <th>Toplam Faiz</th>
-                  <th>Toplam Vergi</th>
-                  <th>Taksit</th>
-                  <th>
-                    <button className="table-maker"
-                    onClick={handleClick}>Tabloya git</button>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>
-                    {tableInfo[tableInfo.length - 1].totalPayment.toFixed(2) +
-                      " TL"}
-                  </td>
-                  <td>
-                    {tableInfo[
-                      tableInfo.length - 1
-                    ].totalInterestPayment.toFixed(2) + " TL"}
-                  </td>
-                  <td>
-                    {tableInfo[tableInfo.length - 1].totalTaxPayment.toFixed(
-                      2
-                    ) + " TL"}
-                  </td>
-                  <td>
-                    {tableInfo[tableInfo.length - 1].installment.toFixed(2) +
-                      " TL"}
-                  </td>
-                  
-                </tr>
-            
-              </tbody>
-            </table>
-          </div>
-          <TableOnFocus
-          tableInfo={tableInfo}
-          ref={tableRef}/>
-          
-        </div>
-      ) : null}
-    </div>
-  );
-};
+});
 
 export default Table;

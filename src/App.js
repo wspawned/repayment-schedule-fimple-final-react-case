@@ -1,6 +1,6 @@
 import FormInput from "./FormInput";
-import Table from "./Table";
 import { ResultContext, ResultProvider } from "./ResultContext";
+import Payments from "./Payments";
 
 const App = (props) => {
   const background = props.background;
@@ -23,7 +23,7 @@ const App = (props) => {
           {(context) => <FormInput setTableInfo={context.setTableInfo} />}
         </ResultContext.Consumer>
         <ResultContext.Consumer>
-          {(context) => <Table tableInfo={context.tableInfo} />}
+          {(context) => <Payments tableInfo={context.tableInfo} />}
         </ResultContext.Consumer>
       </ResultProvider>
     </div>
