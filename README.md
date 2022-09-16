@@ -14,7 +14,14 @@ Projenin AWS Amplify ile deploy edilmiş hali linktedir. Proje kodu componentler
 
 [ResultContext](): Hesaplanmış periodik ve kümülatif ödeme bilgilerini saklar.
 
-[FormInput]():
+[FormInput](): Anapara, aylık faiz, faiz türü, taksit aralığı, taksit sayısı, KKDF ve BSMV oranlarını kullanıcıdan alan formu içerir. Form submit edildiğinde kullanıcı girdileri ile financial util fonksiyonlarını kullanarak bileşik veya basit faiz ödeme bilgilerinin hesaplanmasını sağlar. ResultContext üzerinden sağlanan set metodu ile ödeme planı için state değişikliği sağlar.
+
+[Payments](): ResultContext üzerinden sağlanan ödeme bilgilerini render eder. Üst kısımda kümülatif değerleri tablo olarak yansıtır ve detaylı ödeme tablosuna scroll eden button içerir. Alt kısımda da detaylı ödeme planını içeren Table compenentını bulundurur.
+
+[Table](): Detaylı ödeme planını render eder. Component içerisinde **useImperativeHandle** ve **forwardRef** API'ları ile Table'a ait scroll fonksiyonu parent component(Payments) tarafından erişilebilir hale getirilmiştir.
+
+[financialUtil.js](): Finansal hesaplamaları yapan ve geri ödeme bilgilerini geri dönen pure functionları içerir. **rateDerivation** ile verilen aylık faiz bilgisini ödeme periyoduna göre haftalık ve yıllığa çevirir yada aylık faiz olarak korur. Faiz türüne göre basit faiz için **simpleInterestCalculation**, bileşik faiz için **compoundInterestCalculation** fonksiyonları kullanılır.
+
 
 
 
