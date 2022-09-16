@@ -7,11 +7,13 @@ export const ThemeProvider = (props) => {
   const [background, setBackground] = useState("#f1ab48");
 
   return (
-    <ThemeContext.Provider value={{
-      background,
-      setBackground
-    }}>
+    <ThemeContext.Provider
+      value={{
+        background,
+        setBackground,
+      }}
+    >
       {props.children}
-    </ThemeContext.Provider >
-  )
-}
+    </ThemeContext.Provider>
+  );
+};

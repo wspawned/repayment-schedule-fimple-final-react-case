@@ -33,7 +33,7 @@ export function compoundInterestCalculation(principalValue, numberOfPayment, int
     });
   }
   return paymentsList;
-}
+};
 
 export function simpleInterestCalculation(principalValue, numberOfPayment, interestRateDuePeriod, kkdf, bsmv) {
   const paymentsList = [];
@@ -70,4 +70,12 @@ export function simpleInterestCalculation(principalValue, numberOfPayment, inter
     });
   }
   return paymentsList;
-}
+};
+
+export const rateDerivation = (paymentPeriod, monthlyInterestRate) => {
+  if (paymentPeriod === "Haftalık")
+      return monthlyInterestRate / 4;
+    else if (paymentPeriod === "Yıllık")
+      return monthlyInterestRate * 12;
+    else return monthlyInterestRate;
+};
