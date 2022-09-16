@@ -1,6 +1,8 @@
 import FormInput from "./FormInput";
 import { ResultContext, ResultProvider } from "./ResultContext";
 import Payments from "./Payments";
+import { LIGHT_THEME, DARK_THEME } from "./ThemeContext";
+
 
 const App = (props) => {
   const background = props.theme.background;
@@ -8,7 +10,9 @@ const App = (props) => {
   const setTheme = props.setTheme;
 
   const toggleColor = (color) => {
-    return color === "#f1ab48" ? {background:"#005991", header: "darkgrey"} : {background:"#f1ab48", header: "black"};
+    return color === LIGHT_THEME.background
+      ? DARK_THEME
+      : LIGHT_THEME;
   };
 
   return (
@@ -17,10 +21,9 @@ const App = (props) => {
         className="background-button"
         onClick={() => setTheme(toggleColor(background))}
       >
-        {background === "#f1ab48" ? "🌙" : "☀️"}
+        {background === LIGHT_THEME.background ? "🌙" : "☀️"}
       </button>
-      <h1
-      style={{color: header}}>
+      <h1 style={{ color: header }}>
         Kredi Ödeme Planı <br />
         Hesaplama
       </h1>
