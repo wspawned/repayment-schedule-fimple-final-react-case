@@ -8,7 +8,13 @@ Projenin AWS Amplify ile deploy edilmiş hali linktedir. Proje kodu componentler
 
 ## Uygulama Yapısı
 
+[ThemeContext](): Temanın context olarak saklanmasından ve erişilmesinden sorumludur. İçerisinde renk değerleri saklar, bu değerleri index.js üzerinden App'e aktarır.
 
+[App](): Temel parent componenttir. İçerisinde ResultContext ile çevrelenmiş FormInput ve sonuçların yansıtıldığı Payments componentlerini barındırır. Hesaplanmış ödeme bilgisine ResultContext üzerinden erişim sağlanmıştır. Ek olarak içerisinde theme button yer almaktadır.
+
+[ResultContext](): Hesaplanmış periodik ve kümülatif ödeme bilgilerini saklar.
+
+[FormInput]():
 
 
 
