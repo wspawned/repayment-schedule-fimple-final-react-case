@@ -1,56 +1,19 @@
-# Kullanıcı Girdileri
+# Fimple Case - Kredi Ödeme Planı
 
-* Kredi tutarı (Ana para) 
-* Taksit sayısı
-* Kâr oranı
-* Taksit aralığı seçimi → aylık, haftalık, yıllık
-* Vergi oranı → bsmv ve kkdf
+Projenin AWS Amplify ile deploy edilmiş hali linktedir. Proje kodu componentlere ayrılmış  halde src folderı altında yer almaktadır. Test folderı altında finansal hesap fonksiyonlarının unit testleri bulunmaktadır.
 
-# Amaçlar
+[Deployed project link](https://main.d3c5v7nnj180bc.amplifyapp.com/)
 
-Bir formda kullanıcıdan yukarıdaki bilgilerin girdi olarak alınması  
-Bileşik ve basit kâr formulü kullanılarak hesap yapılabilmesi  
-Geri ödeme planının bir tabloda gösterilmesi  
-React.js kütüphanesi kullanılarak statik bir web sitesi yapılabilmesi  
+![image](https://user-images.githubusercontent.com/80424496/190708024-2e43c05b-6d4d-4ee1-880b-cae4dc2fe9ed.png)
 
-```
-❗Not: Ekranların kullanıcı deneyimi odaklı olması, görsellik ve hizalama konularına dikkat edilmesi beklenmektedir.
-```
+## Uygulama Yapısı
 
-# Beklenen Özellikler
 
-* Fonksiyonel komponentler kullanılması,
-* En az 2 adet React Context oluşturulması,
-* Herhangi bir seviyedeki component’in context’e erişim sağlayabilmesi,
-* Referans üzerinden componentin dışarıya açtığı özelliklere erişim sağlanabilmesi,
-* useRef, useImpretiveHandle, forwardRef kullanılması,
-* Kullanıcı gerekli bilgileri girdikten sonra, bir buton aracılığı ile toplam geri ödeme tutarı, aylık taksit tutarı ve toplam vergi tutarları gösterilebilir.
-* Girilen periyoda göre hesaplanan geri ödeme planı tablosu, bir buton aracılığı ile popup olarak gösterilebilir.
 
-# Formüller
 
-Kar oranı aylık alınmıştır.
 
-Basit → Kâr = ( Anapara * Kâr oranı * ( gün sayısı / 30 ))
 
-Bileşik → Kâr = ( Anapara * ( ( 1 + kâr oranı) ^ (gün sayısı / 30) ) ) - Anapara  
-
-KKDF = Kâr Tutarı * (1.15)  
-
-BSMV = Kâr Tutarı * (1.10)   
-
-# Örnek Hesaplama
-
-* Kâr Oranı: %2.28 aylık
-
-* Anapara: 100,000.00 TL
-
-* Taksit Sayısı: 12
-
-* Taksit aralığı: Aylık
 
 # Notes
 
 * https://color.adobe.com/tr/create/color-wheel
-* https://main.d3c5v7nnj180bc.amplifyapp.com/
-* 
