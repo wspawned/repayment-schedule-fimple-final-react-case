@@ -6,6 +6,9 @@
 
 .app {
   background-color: #f1ab48;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding: 15px;
+  min-height: 100vh;
 }
 
 h1 {
@@ -13,12 +16,6 @@ h1 {
   margin-left: 36%;
   margin-bottom: .5em;
   text-align: left;
-}
-
-.home-page {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  padding: 15px;
-  height: 100vh;
 }
 
 form {
@@ -52,10 +49,8 @@ select {
 
 .result-container {
   margin: auto;
-  width: 95vw;
   padding: 3em;
-  padding-top: 0.5em;
-  margin-top: -8em;
+  padding-top: 1.5em;
 }
 
 table {
@@ -64,12 +59,22 @@ table {
   width: 100%;
 }
 
-th {
-  border-bottom: 1px black;
-}
-
 td {
   text-align: center;
+}
+
+.table-container {
+  margin-top : 4em;
+  padding: 2em;
+  background-color:beige;
+  border-radius: .5em;
+}
+
+.total-payments {
+  margin: auto;
+  width: 40em;
+  padding: .3em;
+  background-color: beige;
 }
 
 button {
@@ -80,25 +85,7 @@ button {
   width: 7em;
 }
 
-.table-container {
-  margin-top : 2em;
-  padding: 2em;
-  background-color:beige;
-  border-radius: .5em;
-}
-
-.table-container > h2 {
-  margin-top: 0;
-}
-
-.total-table {
-  margin: auto;
-  width: 40em;
-  padding: .3em;
-  background-color: beige;
-}
-
-.table-maker {
+.scroller-button {
   height: 1.5em;
   width: 7em;
 }

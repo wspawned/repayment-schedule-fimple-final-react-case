@@ -52,4 +52,5 @@ BSMV = Kâr Tutarı * (1.10)
 # Notes
 
 * https://color.adobe.com/tr/create/color-wheel
+* https://main.d3c5v7nnj180bc.amplifyapp.com/
 * 
