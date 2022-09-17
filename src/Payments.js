@@ -30,12 +30,10 @@ const Payments = (props) => {
               {tableInfo[tableInfo.length - 1].totalPayment.toFixed(2) + " TL"}
             </td>
             <td>
-              {tableInfo[tableInfo.length - 1].totalInterestPayment.toFixed(2) +
-                " TL"}
+              {tableInfo[tableInfo.length - 1].totalInterestPayment.toFixed(2) + " TL"}
             </td>
             <td>
-              {tableInfo[tableInfo.length - 1].totalTaxPayment.toFixed(2) +
-                " TL"}
+              {tableInfo[tableInfo.length - 1].totalTaxPayment.toFixed(2) + " TL"}
             </td>
             <td>
               {tableInfo[tableInfo.length - 1].installment.toFixed(2) + " TL"}

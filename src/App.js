@@ -3,7 +3,6 @@ import { ResultContext, ResultProvider } from "./ResultContext";
 import Payments from "./Payments";
 import { LIGHT_THEME, DARK_THEME } from "./ThemeContext";
 
-
 const App = (props) => {
   const background = props.theme.background;
   const header = props.theme.header;
